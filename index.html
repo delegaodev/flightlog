@@ -168,7 +168,7 @@ async function loadMetar(){
   const u = `https://aviationweather.gov/api/data/metar?ids=${icao}&format=json`;
   const st = $("wst"); st.className = "stat"; st.textContent = "Consultando aviationweather.gov…";
   let m = null;
-  for (const url of [u, "https://corsproxy.io/?url=" + encodeURIComponent(u)]) {
+  for (const url of ["metar.json?t=" + Date.now(), u, "https://api.allorigins.win/raw?url=" + encodeURIComponent(u)]) {
     try {
       const r = await fetch(url); if (!r.ok) continue;
       const d = await r.json(); if (Array.isArray(d) && d[0]) { m = d[0]; break; }
